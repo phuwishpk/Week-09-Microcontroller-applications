@@ -1,0 +1,30 @@
+# ESP-IDF
+build/
+**/build/
+sdkconfig
+sdkconfig.old
+managed_components/
+cmake-build-*/
+compile_commands.json
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# กันชื่ออุปกรณ์พิเศษบน Windows
+NUL
+PRN
+AUX
+CON
+COM[1-9]
+LPT[1-9]
