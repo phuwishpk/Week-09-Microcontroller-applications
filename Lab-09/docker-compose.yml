@@ -1,0 +1,34 @@
+# Docker Compose สำหรับ ESP32 GPIO Lab
+# ใช้สำหรับ build code โดยไม่ต้องลง ESP-IDF ในเครื่อง
+
+version: '3.8'
+
+services:
+  esp-idf:
+    image: espressif/idf:v5.1.2
+    container_name: esp32-gpio-lab
+    volumes:
+      # Mount project directory ไป container
+      - .:/project
+      # Mount home directory เพื่อ cache dependencies
+      - esp-idf-cache:/root/.espressif
+    working_dir: /project
+    environment:
+      # Set ESP-IDF target
+      - IDF_TARGET=esp32
+    # สำหรับ Windows ที่มี Docker Desktop + WSL2
+    # และต้องการใช้ serial port
+    # devices:
+    #   - /dev/ttyUSB0:/dev/ttyUSB0  # Linux/WSL2
+    #   - /dev/ttyACM0:/dev/ttyACM0  # หรือ port อื่น
+    
+    # เปิด interactive mode
+    stdin_open: true
+    tty: true
+    
+    # รัน bash เพื่อให้สามารถใช้คำสั่งได้
+    command: /bin/bash
+
+volumes:
+  # Volume สำหรับ cache ESP-IDF tools
+  esp-idf-cache:
